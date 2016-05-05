@@ -11,9 +11,16 @@ namespace UrlsAndRoutes
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            Route myRoute = new Route("{controller}/{action}", new MvcRouteHandler());
-            routes.Add("MyRoute", myRoute);
-          //  routes.MapRoute("MyRoute", "{controller}/{action}");
+            // Route myRoute = new Route("{controller}/{action}", new MvcRouteHandler());
+            //routes.Add("MyRoute", myRoute);
+            routes.MapRoute("shopSchema2", "Shop/OldAction", new { controller = "Home", action = "Index" });
+            routes.MapRoute("ShopSchema", "Shop/{action}", new { controller = "Home" });
+            routes.MapRoute("", "X{controller}/{action}");
+            routes.MapRoute("MyRoute", "{Controller}/{action}", new { controller = "Home", action = "Index" });
+       
+
+           routes.MapRoute("", "public/{controller}/{action}",
+                new {controller="Home" ,action="Index"});
         }
     }
 }
