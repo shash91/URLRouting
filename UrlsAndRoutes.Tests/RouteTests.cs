@@ -11,29 +11,30 @@ namespace UrlsAndRoutes.Tests
     [TestClass]
     public class RouteTests
     {
-       
-        private HttpContextBase CreateHttpContext(string targetUrl=null,string httpMethod="GET")
+
+        private HttpContextBase CreateHttpContext(string targetUrl = null,
+  string httpMethod = "GET")
         {
-            //create the mock request
+            // create the mock request
             Mock<HttpRequestBase> mockRequest = new Mock<HttpRequestBase>();
-            mockRequest.Setup(m => m.AppRelativeCurrentExecutionFilePath).Returns(targetUrl);
+            mockRequest.Setup(m => m.AppRelativeCurrentExecutionFilePath)
+            .Returns(targetUrl);
             mockRequest.Setup(m => m.HttpMethod).Returns(httpMethod);
-
-            //create the mock response
+            // create the mock response
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(m => m.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(s => s);
-
-            //create the mock context,using the request and response
+            mockResponse.Setup(m => m.ApplyAppPathModifier(
+            It.IsAny<string>())).Returns<string>(s => s);
+            // create the mock context, using the request and response
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(m => m.Request).Returns(mockRequest.Object);
             mockContext.Setup(m => m.Response).Returns(mockResponse.Object);
-
-            //return the mocked context
+            // return the mocked context
             return mockContext.Object;
         }
 
+
         private void TestRouteMatch(string url, string controller, string action,
-     object routeProperties = null, string httpMethod = "GET")
+ object routeProperties = null, string httpMethod = "GET")
         {
             // Arrange
             RouteCollection routes = new RouteCollection();
@@ -48,7 +49,7 @@ namespace UrlsAndRoutes.Tests
         }
 
         private bool TestIncomingRouteResult(RouteData routeResult,
-        string controller, string action, object propertySet = null)
+  string controller, string action, object propertySet = null)
         {
             Func<object, object, bool> valCompare = (v1, v2) => {
                 return StringComparer.InvariantCultureIgnoreCase
@@ -83,24 +84,43 @@ namespace UrlsAndRoutes.Tests
             Assert.IsTrue(result == null || result.Route == null);
         }
         [TestMethod]
-       /* public void TestIncomingRoutes()
+        /* public void TestIncomingRoutes()
+         {
+             // check for the URL that we hope to receive
+             TestRouteMatch("~/Admin/Index", "Admin", "Index");
+
+             // check that the values are being obtained from the segments
+             TestRouteMatch("~/One/Two", "One", "Two");
+
+             // ensure that too many or too few segments fails to match
+             TestRouteFail("~/Admin/Index/Segment");
+             TestRouteFail("~/Admin");
+         }*/
+        /* public void TestIncomingRoutes()
+         {
+             TestRouteMatch("~/", "Home", "Index");
+             TestRouteMatch("~/Customer", "Customer", "Index");
+             TestRouteMatch("~/Shop/Index", "Home", "Index");
+             TestRouteMatch("~/Customer/List", "Customer", "List");
+             TestRouteFail("~/Customer/List/All");
+         }*/
+     /*   public void TestIncomingRoutes()
         {
-            // check for the URL that we hope to receive
-            TestRouteMatch("~/Admin/Index", "Admin", "Index");
-
-            // check that the values are being obtained from the segments
-            TestRouteMatch("~/One/Two", "One", "Two");
-
-            // ensure that too many or too few segments fails to match
-            TestRouteFail("~/Admin/Index/Segment");
-            TestRouteFail("~/Admin");
+            TestRouteMatch("~/", "Home", "Index", new { id = "DefaultId" });
+            TestRouteMatch("~/Customer", "Customer", "Index", new { id = "DefaultId" });
+            TestRouteMatch("~/Customer/List", "Customer", "List",
+            new { id = "DefaultId" });
+            TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
+            TestRouteFail("~/Customer/List/All/Delete");
         }*/
-        public void TestIncomingRoutes()
+
+       public void TestIncomingRoutes()
         {
             TestRouteMatch("~/", "Home", "Index");
             TestRouteMatch("~/Customer", "Customer", "Index");
             TestRouteMatch("~/Customer/List", "Customer", "List");
-            TestRouteFail("~/Customer/List/All");
+            TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
+            TestRouteFail("~/Customer/List/All/Delete");
         }
     }
 }

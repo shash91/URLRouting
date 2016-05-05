@@ -93,4 +93,3 @@ C:\Projects\URLRouting\UrlsAndRoutes\bin\System.Web.Helpers.xml
 C:\Projects\URLRouting\UrlsAndRoutes\bin\System.Web.Mvc.xml
 C:\Projects\URLRouting\UrlsAndRoutes\obj\Debug\UrlsAndRoutes.dll
 C:\Projects\URLRouting\UrlsAndRoutes\obj\Debug\UrlsAndRoutes.pdb
-C:\Projects\URLRouting\UrlsAndRoutes\obj\Debug\UrlsAndRoutes.csprojResolveAssemblyReference.cache
