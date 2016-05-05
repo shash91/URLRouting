@@ -104,23 +104,32 @@ namespace UrlsAndRoutes.Tests
              TestRouteMatch("~/Customer/List", "Customer", "List");
              TestRouteFail("~/Customer/List/All");
          }*/
-     /*   public void TestIncomingRoutes()
-        {
-            TestRouteMatch("~/", "Home", "Index", new { id = "DefaultId" });
-            TestRouteMatch("~/Customer", "Customer", "Index", new { id = "DefaultId" });
-            TestRouteMatch("~/Customer/List", "Customer", "List",
-            new { id = "DefaultId" });
-            TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
-            TestRouteFail("~/Customer/List/All/Delete");
-        }*/
+        /*   public void TestIncomingRoutes()
+           {
+               TestRouteMatch("~/", "Home", "Index", new { id = "DefaultId" });
+               TestRouteMatch("~/Customer", "Customer", "Index", new { id = "DefaultId" });
+               TestRouteMatch("~/Customer/List", "Customer", "List",
+               new { id = "DefaultId" });
+               TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
+               TestRouteFail("~/Customer/List/All/Delete");
+           }*/
 
-       public void TestIncomingRoutes()
+        /* public void TestIncomingRoutes()
+          {
+              TestRouteMatch("~/", "Home", "Index");
+              TestRouteMatch("~/Customer", "Customer", "Index");
+              TestRouteMatch("~/Customer/List", "Customer", "List");
+              TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
+              TestRouteFail("~/Customer/List/All/Delete");
+          }*/
+        public void TestIncomingRoutes()
         {
             TestRouteMatch("~/", "Home", "Index");
             TestRouteMatch("~/Customer", "Customer", "Index");
             TestRouteMatch("~/Customer/List", "Customer", "List");
             TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
-            TestRouteFail("~/Customer/List/All/Delete");
+            TestRouteMatch("~/Customer/List/All/Delete","Customer","List",new { id = "All", catchall = "Delete" });
+            TestRouteMatch("~/Customer/List/All/Delete/Perm", "Customer", "List", new { id = "All", catchall = "Delete/Perm" });
         }
     }
 }

@@ -25,7 +25,7 @@ namespace UrlsAndRoutes
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapRoute("MyRoute", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", Id = "DefaultId"});
+            routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", Id = UrlParameter.Optional});
         }
     }
 }
