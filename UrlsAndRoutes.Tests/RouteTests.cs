@@ -122,7 +122,7 @@ namespace UrlsAndRoutes.Tests
               TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
               TestRouteFail("~/Customer/List/All/Delete");
           }*/
-        public void TestIncomingRoutes()
+       /* public void TestIncomingRoutes()
         {
             TestRouteMatch("~/", "Home", "Index");
             TestRouteMatch("~/Customer", "Customer", "Index");
@@ -130,6 +130,20 @@ namespace UrlsAndRoutes.Tests
             TestRouteMatch("~/Customer/List/All", "Customer", "List", new { id = "All" });
             TestRouteMatch("~/Customer/List/All/Delete","Customer","List",new { id = "All", catchall = "Delete" });
             TestRouteMatch("~/Customer/List/All/Delete/Perm", "Customer", "List", new { id = "All", catchall = "Delete/Perm" });
+        }*/
+        public void TestIncomingRoutes()
+        {
+            TestRouteMatch("~/", "Home", "Index");
+            TestRouteMatch("~/Home", "Home", "Index");
+            TestRouteMatch("~/Home/Index", "Home", "Index");
+
+            TestRouteMatch("~/Home/About", "Home", "About");
+            TestRouteMatch("~/Home/About/MyId", "Home", "About", new { id = "MyId" });
+            TestRouteMatch("~/Home/About/MyId/More/Segments", "Home", "About", new { id = "MyId", catchall = "More/Segments" });
+
+            TestRouteFail("~/Home/OtherAction");
+            TestRouteFail("~/Account/Index");
+            TestRouteFail("~/Account/About");
         }
     }
 }

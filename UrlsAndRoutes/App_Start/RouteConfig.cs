@@ -31,11 +31,25 @@ namespace UrlsAndRoutes
              routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", Id = UrlParameter.Optional },
                 new[] { "UrlsAndroutes.Controllers" });*/
 
-            Route myRoute = routes.MapRoute("AddControllerRoute", "Home/{action}/{id}/{*catchall}",
+            /*    Route myRoute = routes.MapRoute("AddControllerRoute", "Home/{action}/{id}/{*catchall}",
+                    new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                    new[] { "UrlsAndroutes.Additionalcontrollers" }
+                    );
+                myRoute.DataTokens["UseNamespaceFallback"] = false;*/
+
+            //Constraining routes to a specific values
+            /*routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                new[] { "UrlsAndroutes.Additionalcontrollers" }
-                );
-            myRoute.DataTokens["UseNamespaceFallback"] = false;
+                new { controller = "^H.*",action="^Index$|^About$" },
+                new[] { "UrlsAndroutes.Controllers" });*/
+
+
+            //Constraining a route using HTTP Methods
+
+            routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new { controller = "^H.*", action = "Index|About", httpMethod = new HttpMethodConstraint("GET") },
+                new[] { "UrlsAndroutes.Controllers" });
         }
     }
 }
