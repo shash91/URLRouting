@@ -25,7 +25,17 @@ namespace UrlsAndRoutes
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", Id = UrlParameter.Optional});
+            /* routes.MapRoute("AddControllerRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", Id = UrlParameter.Optional},
+                 new[] { "UrlsAndroutes.Additionalcontrollers" });
+
+             routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", Id = UrlParameter.Optional },
+                new[] { "UrlsAndroutes.Controllers" });*/
+
+            Route myRoute = routes.MapRoute("AddControllerRoute", "Home/{action}/{id}/{*catchall}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "UrlsAndroutes.Additionalcontrollers" }
+                );
+            myRoute.DataTokens["UseNamespaceFallback"] = false;
         }
     }
 }
